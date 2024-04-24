@@ -21,8 +21,6 @@ http://localhost:8765/CURRENCY-EXCHANGE-SERVICE/currency-exchange/from/USD/to/IN
 http://localhost:8765/CURRENCY-CONVERSION-SERVICE/currency-conversion/from/USD/to/INR/quantity/10
 http://localhost:8765/CURRENCY-CONVERSION-SERVICE/currency-conversion-feign/from/USD/to/INR/quantity/10
 
-
-
 /* To make upper case to lower case, in api-gateway application.properties, we can enable
 	spring.cloud.gateway.discovery.locator.lowerCaseServiceId=true
 	New urls

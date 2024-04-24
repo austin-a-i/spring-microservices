@@ -65,7 +65,7 @@
 				</image>
 				<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>
-			<!-- Run As -> maven -> maven build  -> Goals 
+			<!-- Run As -> maven -> maven build  -> Goals
 		    				spring-boot:build-image -DskipTests  -->
 			</plugin>
 		</plugins>

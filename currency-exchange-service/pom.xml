@@ -34,9 +34,9 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-		
-		<!-- Micrometer - Vendor-neutral application observability facade. 
-    Instrument your JVM-based application code without vendor lock-in.  
+
+		<!-- Micrometer - Vendor-neutral application observability facade.
+    Instrument your JVM-based application code without vendor lock-in.
     Observation (Metrics & Logs) + Tracing.
 		-->
 
@@ -44,21 +44,21 @@
 		    <groupId>io.micrometer</groupId>
 		    <artifactId>micrometer-observation</artifactId>
 		</dependency>
-	
+
 		<!-- OPTION 1: Open Telemetry as Bridge (RECOMMENDED) -->
-		<!-- Open Telemetry 
+		<!-- Open Telemetry
 		    - Simplified Observability (metrics, logs, and traces) -->
-	
+
 		<dependency>
 		    <groupId>io.micrometer</groupId>
 		    <artifactId>micrometer-tracing-bridge-otel</artifactId>
 		</dependency>
-		
+
 		<dependency>
 		    <groupId>io.opentelemetry</groupId>
 		    <artifactId>opentelemetry-exporter-zipkin</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
@@ -115,7 +115,7 @@
 				</image>
 				<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>
-			<!-- Run As -> maven -> maven build  -> Goals 
+			<!-- Run As -> maven -> maven build  -> Goals
 		    				spring-boot:build-image -DskipTests  -->
 			</plugin>
 		</plugins>
