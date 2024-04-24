@@ -17,10 +17,12 @@ public class CurrencyConversionController {
 	@Autowired
 	CurrencyExchangeProxy proxy;
 	
+    @Autowired
+    private RestTemplate restTemplate;
+	
 	@GetMapping("currency-conversion-feign/from/{from}/to/{to}/quantity/{quantity}")
 	public CurrencyConversion calculateCurrencyConversionFeign( @PathVariable String from,
 								@PathVariable String to, @PathVariable BigDecimal quantity) {
-		
 		
 		CurrencyConversion currencyConversion = proxy.retrieveExchangeRate(from, to);
 		return new CurrencyConversion(currencyConversion.getId(), from, to, quantity, 
@@ -31,26 +33,31 @@ public class CurrencyConversionController {
 	}
 
 	
+	/*
+	 * To Integrate RestTemplate with micrometer, create RestTemplate using 
+	 * 		RestTemplateBuilder
+	 */
+	
+	
 	  //Hard-Coded Invocation using Rest Template
 	  
-	  @GetMapping("currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
-	  public CurrencyConversion calculateCurrencyConversion( @PathVariable String from, 
-			  @PathVariable String to, @PathVariable BigDecimal quantity) {
+	@GetMapping("currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
+  	public CurrencyConversion calculateCurrencyConversion( @PathVariable String from, 
+  			@PathVariable String to, @PathVariable BigDecimal quantity) {
+	  HashMap<String, String> uriVariables = new HashMap<String, String>();
+	  uriVariables.put("from", from); uriVariables.put("to", to);
 	  
-		  HashMap<String, String> uriVariables = new HashMap<String, String>();
-		  uriVariables.put("from", from); uriVariables.put("to", to);
-		  
-		  ResponseEntity<CurrencyConversion> conversionResponseEntity = new
-		  RestTemplate().getForEntity((
-		  "http://localhost:8000/currency-exchange/from/{from}/to/{to}"),
-		  CurrencyConversion.class, uriVariables );
-		  
-		  CurrencyConversion currencyConversion = conversionResponseEntity.getBody();
-		  return new CurrencyConversion(currencyConversion.getId(), from, to, quantity,
-		  currencyConversion.getConversionMultiple(),
-		  quantity.multiply(currencyConversion.getConversionMultiple()),
-		  currencyConversion.getEnvironment() + " - REST Template");
+	  ResponseEntity<CurrencyConversion> conversionResponseEntity = restTemplate.getForEntity((
+	  "http://localhost:8000/currency-exchange/from/{from}/to/{to}"),
+	  CurrencyConversion.class, uriVariables );
 	  
-	  }
+	  CurrencyConversion currencyConversion = conversionResponseEntity.getBody();
+	  return new CurrencyConversion(currencyConversion.getId(), from, to, quantity,
+	  currencyConversion.getConversionMultiple(),
+	  quantity.multiply(currencyConversion.getConversionMultiple()),
+	  currencyConversion.getEnvironment() + " - REST Template");
+		  
+
+  }
 	 
 }
