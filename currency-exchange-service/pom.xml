@@ -106,6 +106,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+				<image>
+				   <name>spring/microservice-${project.artifactId}:${project.version}</name>
+<!--				   <env>
+				      <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+				   </env>-->
+				</image>
+				<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+				</configuration>
+			<!-- Run As -> maven -> maven build  -> Goals 
+		    				spring-boot:build-image -DskipTests  -->
 			</plugin>
 		</plugins>
 	</build>
